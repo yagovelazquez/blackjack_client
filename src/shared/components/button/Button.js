@@ -9,7 +9,7 @@ const Button = ({
 }) => {
 
   const defaultStyles =
-  'bg-primary text-white font-[400] text-[13px] py-[7px] px-[12px] hover:bg-primary700';
+  'bg-primary text-white font-[400] text-[13px] flex justify-center items-center py-[7px] px-[12px] hover:bg-primary700';
 
   const buttonStyles = twMerge(`${defaultStyles} ${className}`)
  

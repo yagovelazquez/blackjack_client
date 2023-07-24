@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Auth from '../shared/auth/Auth';
 import Layout from '../shared/components/layout/Layout';
+import Blackack from './blackjack/Blackjack';
 import Login from './login/Login';
 import Register from './register/Register';
 
@@ -14,7 +15,7 @@ export const router = createBrowserRouter([
       {
         path: 'game',
         element: <Auth />,
-        children: [{ path: 'ronaldo', element: <div></div> }],
+        children: [{ path: 'blackjack', element: <Blackack /> }],
       },
       { path: '*', element: <Navigate to={'login'} /> },
     ],

@@ -27,7 +27,19 @@ const signIn = async (userData) => {
   return camelizeData(data);
 };
 
+const getUser = async ({ accessToken }) => {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${accessToken}`,
+    },
+  };
+  const data = await request(`${apiUrl}/user/get/`, options);
+  return camelizeData(data);
+};
+
 export const userClient = {
   register,
-  signIn
+  signIn,
+  getUser,
 };

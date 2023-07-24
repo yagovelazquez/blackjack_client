@@ -4,7 +4,7 @@ import Button from '../../shared/components/button/Button';
 import Headings from '../../shared/components/texts/Heading';
 import Paragraph from '../../shared/components/texts/Paragraph';
 import Small from '../../shared/components/texts/Small';
-import RegisterForm from './RegisterForm';
+import RegisterForm from './components/RegisterForm';
 
 function Register(params) {
   const navigate = useNavigate();

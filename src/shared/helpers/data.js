@@ -18,13 +18,27 @@ export const snakizeData = (data, excludedKeys) => {
   return snakizedData;
 };
 
-const processDataKeyValue = (data, processFunc, excludedKeys) => {
-  const processedData = {};
-  for (const key in data) {
-    if (data.hasOwnProperty(key)) {
-      const processedKey = excludedKeys?.includes(key) ? key : processFunc(key);
-      processedData[processedKey] = data[key];
-    }
+const processDataKeyValue = (value, func, excludedKeys) => {
+  if (Array.isArray(value)) {
+    return value.map((item) => processDataKeyValue(item, func, excludedKeys));
   }
-  return processedData;
+
+  if (!value) {
+    return value;
+  }
+
+  if (typeof value === 'object' && value !== null) {
+    return Object.keys(value).reduce((result, key) => {
+      const transformedKey = excludedKeys?.includes(key) ? key : func(key);
+      const transformedValue = processDataKeyValue(
+        value[key],
+        func,
+        excludedKeys
+      );
+
+      return { ...result, [transformedKey]: transformedValue };
+    }, {});
+  }
+
+  return value;
 };

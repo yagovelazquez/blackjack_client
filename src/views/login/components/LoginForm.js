@@ -1,24 +1,14 @@
 import { Fragment, useCallback, useContext } from 'react';
-import { Form } from '../../shared/components/form/Form';
+import { Form } from '../../../shared/components/form/Form';
 import * as Yup from 'yup';
 import { useMutation } from 'react-query';
-import { userClient } from '../../client/user/userClient';
-import { apiUrl } from '../../config/config';
-import LoadingSpinnerModal from '../../shared/components/loading/LoadingSpinnerModal';
-import { UserContext } from '../../contexts/userContext';
-import useLocalStorage from '../../shared/hooks/useLocalStorage';
+import { userClient } from '../../../client/user/userClient';
+import { UserContext } from '../../../contexts/userContext';
+import useLocalStorage from '../../../shared/hooks/useLocalStorage';
+import LoadingSpinnerModal from '../../../shared/components/loading/LoadingSpinnerModal';
+import { useNavigate } from 'react-router-dom';
 
 const inputList = [
-  {
-    name: 'name',
-    placeholder: 'Name',
-    inputContainerClass: '',
-  },
-  {
-    name: 'username',
-    placeholder: 'Username',
-    inputContainerClass: '',
-  },
   {
     name: 'email',
     placeholder: 'Email',
@@ -30,12 +20,6 @@ const inputList = [
     placeholder: 'Password',
     inputContainerClass: '',
     type: 'password',
-  },
-  {
-    name: 'balance',
-    placeholder: 'Balance',
-    inputContainerClass: '',
-    type: 'number',
   },
 ];
 
@@ -52,42 +36,41 @@ const validationSchema = Yup.object().shape({
 const initialValues = {
   password: '',
   email: '',
-  name: '',
-  username: '',
-  balance: '',
 };
 
-function RegisterForm() {
+function LoginForm() {
+  const navigate = useNavigate()
   const { setUser } = useContext(UserContext);
   const { setItem } = useLocalStorage();
-  const { mutateAsync: mutateAsyncRegister, isLoading: isLoadingRegister } =
-    useMutation(userClient.register, {
+  const { mutateAsync: mutateAsyncLogin, isLoading: isLoadingLogin } =
+    useMutation(userClient.signIn, {
       onSuccess: (bodyData) => {
         setUser(bodyData.data);
         setItem({ key: 'user', data: bodyData.data });
+        navigate('/game/blackjack')
       },
     });
 
   const submitHandler = useCallback(
     (userData) => {
-      mutateAsyncRegister(userData);
+      mutateAsyncLogin(userData);
     },
-    [mutateAsyncRegister]
+    [mutateAsyncLogin]
   );
 
   return (
     <Fragment>
-      <LoadingSpinnerModal isLoading={isLoadingRegister} />
+      <LoadingSpinnerModal isLoading={isLoadingLogin} />
       <Form
         onSubmit={submitHandler}
         inputList={inputList}
         validationSchema={validationSchema}
         initialValues={initialValues}
         classes={classes}
-        buttonLabel={'Create account'}
+        buttonLabel="Sign in"
       />
     </Fragment>
   );
 }
 
-export default RegisterForm;
+export default LoginForm;

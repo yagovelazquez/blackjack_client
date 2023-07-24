@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
-import { UserContext } from './contexts/userContext';
+import { UserContextProvider } from './contexts/userContext';
 import { router } from './views/Routes';
 
 const queryClient = new QueryClient({
@@ -18,7 +18,9 @@ function App() {
   return (
     <div className="App">
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <UserContextProvider>
+          <RouterProvider router={router}/>
+          </UserContextProvider>
         </QueryClientProvider>
     </div>
   );

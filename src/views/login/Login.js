@@ -4,7 +4,7 @@ import Button from '../../shared/components/button/Button';
 import Headings from '../../shared/components/texts/Heading';
 import Paragraph from '../../shared/components/texts/Paragraph';
 import Small from '../../shared/components/texts/Small';
-import LoginForm from './LoginForm';
+import LoginForm from './components/LoginForm';
 
 function Login(params) {
   const navigate = useNavigate();
