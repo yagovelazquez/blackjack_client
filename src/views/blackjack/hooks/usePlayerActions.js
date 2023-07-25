@@ -20,7 +20,7 @@ function usePlayerActions({ gameId }) {
     },
   });
 
-  console.log(dealData, 'dealer data')
+ const playAgainHandler = useCallback(() => setHandData(null), [])
 
   const dealHandler = useCallback(
     (betValue) => {
@@ -38,7 +38,6 @@ function usePlayerActions({ gameId }) {
     mutationKey: cacheKeys.mutation.hit,
     onSuccess: (bodyData) => {
       queryClient.invalidateQueries([cacheKeys.user]);
-      console.log(bodyData)
       setHandData(bodyData.data)
     },
   });
@@ -84,6 +83,7 @@ function usePlayerActions({ gameId }) {
     dataStand,
     isLoadingStand,
     standHandler,
+    playAgainHandler,
   };
 }
 

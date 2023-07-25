@@ -3,7 +3,6 @@ export class CardConverter {
     this.suits = {spades: '♠︎', hearts: '♥︎', clubs: '♣︎',  diamonds: '♦︎'};
     this.values = [
       'A',
-      '1',
       '2',
       '3',
       '4',

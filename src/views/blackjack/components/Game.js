@@ -9,19 +9,15 @@ import _ from 'lodash'
 
 function Game({ gameId }) {
   const { user } = useContext(UserContext);
-  const { dealHandler, hitHandler, standHandler, handData } =
-    usePlayerActions({ gameId });
+  const { dealHandler, hitHandler, standHandler, handData, playAgainHandler } = usePlayerActions({ gameId });
 
   return (
     <div className="relative w-full h-full">
       <Headings className={'text-white absolute right-10 top-4'} variant={'h2'}>
         Balance: {user.balance}$
       </Headings>
-      {handData.winner && (
-        <div className="text-white">WINNER: {handData.winner}</div>
-      )}
       <AnimatePresence initial={false}>
-        {(_.isEmpty(handData) || handData.winner) ? (
+        {(_.isEmpty(handData)) ? (
           <motion.div
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
@@ -48,6 +44,7 @@ function Game({ gameId }) {
               handData={handData}
               onHit={hitHandler}
               onStand={standHandler}
+              onPlayAgain={playAgainHandler}
             />
           </motion.div>
         )}
