@@ -1,12 +1,12 @@
 import { Fragment, useCallback, useContext, useEffect } from 'react';
 import { Form } from '../../../shared/components/form/Form';
 import * as Yup from 'yup';
-import { useMutation } from 'react-query';
 import { userClient } from '../../../client/user/userClient';
 import LoadingSpinnerModal from '../../../shared/components/loading/LoadingSpinnerModal';
 import { UserContext } from '../../../contexts/userContext';
 import useLocalStorage from '../../../shared/hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
 const inputList = [
   {
@@ -64,8 +64,8 @@ function RegisterForm() {
   const { mutateAsync: mutateAsyncRegister, isLoading: isLoadingRegister } =
     useMutation(userClient.register, {
       onSuccess: (bodyData) => {
-        setItem({ key: 'user', data: bodyData.data });
-        setUser(bodyData.data);
+        setItem({ key: 'user', data: bodyData?.data });
+        setUser(bodyData?.data);
       },
     });
 

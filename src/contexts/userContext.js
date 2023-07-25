@@ -1,5 +1,5 @@
 import { createContext, useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { userClient } from '../client/user/userClient';
 import { cacheKeys } from '../config/config';
 

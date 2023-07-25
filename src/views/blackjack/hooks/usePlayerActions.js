@@ -1,5 +1,6 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useContext, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+
 import { gameActionsClient } from '../../../client/game/gameActionsClient';
 import { cacheKeys } from '../../../config/config';
 import { UserContext } from '../../../contexts/userContext';

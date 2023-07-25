@@ -1,4 +1,4 @@
-import { useIsMutating } from 'react-query';
+import { useIsMutating } from '@tanstack/react-query';
 import { Outlet } from 'react-router-dom';
 import LoadingSpinnerModal from '../loading/LoadingSpinnerModal';
 

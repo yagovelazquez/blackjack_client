@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useContext } from 'react';
 import { Form } from '../../../shared/components/form/Form';
 import * as Yup from 'yup';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { userClient } from '../../../client/user/userClient';
 import { UserContext } from '../../../contexts/userContext';
 import useLocalStorage from '../../../shared/hooks/useLocalStorage';
@@ -45,8 +45,8 @@ function LoginForm() {
   const { mutateAsync: mutateAsyncLogin, isLoading: isLoadingLogin } =
     useMutation(userClient.signIn, {
       onSuccess: (bodyData) => {
-        setUser(bodyData.data);
-        setItem({ key: 'user', data: bodyData.data });
+        setUser(bodyData?.data);
+        setItem({ key: 'user', data: bodyData?.data });
         navigate('/game/blackjack')
       },
     });

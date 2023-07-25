@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { gameClient } from '../../client/game/gameClient';
 import { UserContext } from '../../contexts/userContext';
 import { blackjack, table } from '../../shared/assets/img';
