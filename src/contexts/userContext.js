@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { userClient } from '../client/user/userClient';
 import { cacheKeys } from '../config/config';
@@ -15,7 +15,7 @@ export const UserContextProvider = ({ children }) => {
   // const { retrieveItem } = useLocalStorage(); TODO PERSIST AUTH
 
   const [user, setUser] = useState();
-  const isLoggedIn = user ? true : false;
+  const isLoggedIn = useMemo(() => user ? true : false, [user]);
   useQuery(
     [cacheKeys.user],
     () => userClient.getUser({ accessToken: user.accessToken }),

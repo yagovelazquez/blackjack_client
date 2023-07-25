@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useContext } from 'react';
+import { Fragment, useCallback, useContext, useEffect } from 'react';
 import { Form } from '../../../shared/components/form/Form';
 import * as Yup from 'yup';
 import { useMutation } from 'react-query';
@@ -58,15 +58,14 @@ const initialValues = {
 };
 
 function RegisterForm() {
-  const { setUser } = useContext(UserContext);
+  const { setUser, user } = useContext(UserContext);
   const { setItem } = useLocalStorage();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { mutateAsync: mutateAsyncRegister, isLoading: isLoadingRegister } =
     useMutation(userClient.register, {
       onSuccess: (bodyData) => {
-        setUser(bodyData.data);
         setItem({ key: 'user', data: bodyData.data });
-        navigate('/game/blackack')
+        setUser(bodyData.data);
       },
     });
 
@@ -76,6 +75,12 @@ function RegisterForm() {
     },
     [mutateAsyncRegister]
   );
+
+  useEffect(() => {
+    if (user) {
+      navigate('/game/blackjack');
+    }
+  }, [navigate, user]);
 
   return (
     <Fragment>

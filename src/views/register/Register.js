@@ -9,7 +9,7 @@ import RegisterForm from './components/RegisterForm';
 function Register(params) {
   const navigate = useNavigate();
 
-  const createAccountHandler = useCallback(() => {
+  const changeToSignInHandler = useCallback(() => {
     navigate('/login');
   }, [navigate]);
 
@@ -21,11 +21,11 @@ function Register(params) {
       <Paragraph className="mt-2">
         Game was made using a rest-api with node on the backend
       </Paragraph>
-      <Paragraph className="mt-5 mb-10">Sign in to see in action</Paragraph>
+      <Paragraph className="mt-5 mb-10">Register to see in action</Paragraph>
       <RegisterForm />
       <Small className="my-5">Already have account?</Small>
       <Button
-        onClick={createAccountHandler}
+        onClick={changeToSignInHandler}
         className="bg-white text-gray900 border-white border hover:border hover:border-gray900 hover:bg-white"
       >
         Sign in
